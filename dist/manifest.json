@@ -1,0 +1,43 @@
+{
+    "manifest_version": 2,
+    "name": "LinkedIn Contact Importer",
+    "description": "Import your contacts in Airtable or Google Sheet directly from your linkedIn pages.",
+    "version": "1.0.0",
+    "browser_action": {
+        "default_icon": "icon-16.png",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": ["js/background.js"],
+        "persistent": false
+    },
+    "content_scripts": [{
+        "matches": ["https://www.linkedin.com/*"],
+        "js": [
+            "js/content.js"
+        ],
+        "run_at": "document_end"
+    }],
+    "icons": {
+        "16": "icon-16.png",
+        "48": "icon-48.png",
+        "128": "icon-128.png"
+    },
+    "permissions": [
+        "storage",
+        "identity",
+        "https://www.linkedin.com/*",
+        "https://api.airtable.com/*",
+        "https://sheets.googleapis.com/*",
+        "https://www.googleapis.com/",
+        "https://accounts.google.com/",
+        "https://*.googleusercontent.com/",
+        "https://*.chromiumapp.org/*",
+        "https://accounts.google.com/o/oauth2/v2/auth"
+    ],
+    "oauth2": {
+        "client_id": "755133851391-ad7iabsnljv2qggg2sj2adognmva7sjf.apps.googleusercontent.com",
+        "scopes": ["https://www.googleapis.com/auth/spreadsheets"]
+    },
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkxg5tB3B5GCPqb0YEE6Eocdp1CluGZcANcAHI6zFNIdtB5VsynRM4AB/+SJwQajsp1PxbH3rTjWCejOMi5nJbzSrZj0bAOj3765nGGMp/gsD7pDSHs8VjMzbi3vnF1eFaUa6Uu8bQ86VUzS+OiEVvMX4S0nE+vGIimkBw3ndo4J2/MTNLlPDq5hWEOKiBStDaxzRmcsJ0K6i0Mu6xSx4sb5g/gx9q7Vuv2WdIkv/OkGshGnhL+7yT7Aw8BUkdIfn3ZQYfEJrEaD01BVYMH4MvGnK2FSprMMw3MPfWiBPx5ZPkEENuE7Ggl8ACqaBeRI2EyIc37y8cg/E9BSqDX1f+wIDAQAB"
+}
