@@ -24,7 +24,7 @@ yarn dev
 
 In [Google Chrome](https://www.google.com/chrome/), open up chrome://extensions in a new tab. Make sure the `Developer Mode` checkbox in the upper-right corner is turned on. Click `Load unpacked` and select the `dist` directory in this repository - your extension should now be loaded.
 
-**If you don't want to build it. You can download the V1.zip file in the repo releases https://github.com/datablist/linkedin-contact-importer-airtable-google-sheet-datablist/releases/tag/1.0.0 , unzip it and load the folder in Chrome.
+**If you don't want to build it. You can download the V1.zip file in the repo releases https://github.com/datablist/linkedin-contact-importer-airtable-google-sheet-datablist/releases/tag/1.0.0 , unzip it and load the folder in Chrome.**
 
 
 ## How to use it
