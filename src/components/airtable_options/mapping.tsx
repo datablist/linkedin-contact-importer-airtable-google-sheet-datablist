@@ -78,7 +78,7 @@ export const Mapping: FunctionComponent<IMappingProps> = ({
                 <div className="alert alert-warning">
                     {errorMessage}
                     <p>
-                        <a href="#">
+                        <a href="https://github.com/datablist/linkedin-contact-importer-airtable-google-sheet-datablist">
                             Please visit documentation to learn more
                         </a>.
                     </p>

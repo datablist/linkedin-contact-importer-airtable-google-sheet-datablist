@@ -8,7 +8,7 @@ import { ConnectionStatus }  from '@src/components/connectionStatus'
 
 import { Mapping } from './mapping'
 
-export function GoogleSheetConf(){
+export const GoogleSheetConf: FunctionComponent = () => {
     const [spreadsheetId, setSpreadsheetId] = useState('');
     const [connectionStatus, setConnectionStatus] = useState('pending');
 
@@ -84,17 +84,31 @@ export function GoogleSheetConf(){
                             >
                                 Google Sheet Id
                             </label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="google_sheet_id"
-                                placeholder="XXXXXXX"
-                                onChange={handleSpreadsheetIdChange}
-                                value={spreadsheetId}
-                            />
-                            <div
-                                className="form-text"
-                            >
+                            <div className="input-group mb-2">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="google_sheet_id"
+                                    placeholder="XXXXXXX"
+                                    onChange={handleSpreadsheetIdChange}
+                                    value={spreadsheetId}
+                                />
+                                {spreadsheetId.length > 10 && (
+                                    <a
+                                        className="input-group-text"
+                                        href={`https://docs.google.com/spreadsheets/d/${spreadsheetId}/`}
+                                        target="_blank"
+                                    >
+                                        <img
+                                        width={16}
+                                        height={16}
+                                        src={browser.runtime.getURL("images/external-link.svg")}
+                                        />
+                                    </a>
+                                )}
+
+                            </div>
+                            <div className="form-text">
                                 https://docs.google.com/spreadsheets/d/<strong>GoogleSheetId</strong>/edit
                             </div>
                         </div>
