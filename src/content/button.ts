@@ -25,13 +25,15 @@ export const createBtn = async ({
 /*
     To avoid a second click, function to disable the btn
 */
-export function disableButton(btn: HTMLButtonElement, text: string): void{
+export function disableButton(btn: HTMLButtonElement, text: string): HTMLButtonElement{
     btn.className += " artdeco-button--disabled";
     btn.setAttribute('disabled', "")
     btn.innerText = text;
 
     // Clone button to remove all event handler
-    btn.replaceWith(btn.cloneNode(true))
+    const newBtn = btn.cloneNode(true) as HTMLButtonElement;
+    btn.replaceWith(newBtn)
+    return newBtn;
 }
 
 export const hasElement = (btnIdentifier: string, node: Element | Document): boolean => {

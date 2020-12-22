@@ -22,9 +22,9 @@ export const GoogleSheetConf: FunctionComponent = () => {
         });
 
         (async () => {
-            const isConfigured = await GoogleSheetBridge.isConfigured();
+            const isLoggedIn = await GoogleSheetBridge.isLoggedIn();
 
-            if(isConfigured){
+            if(isLoggedIn){
                 setConnectionStatus('ok')
             } else {
                 setConnectionStatus('disconnected')

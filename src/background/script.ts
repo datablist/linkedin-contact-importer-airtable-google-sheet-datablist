@@ -21,7 +21,7 @@ browser.runtime.onMessage.addListener(async (
     if(message.action == "checkIfConfigured"){
         return await isBridgeConfigured()
     }else if(message.action == "saveProfiles"){
-        saveProfiles(tab, message.payload as LinkedInProfile[])
+        return await saveProfiles(tab, message.payload as LinkedInProfile[])
     }
 
     console.log(message);

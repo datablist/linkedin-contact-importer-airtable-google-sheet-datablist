@@ -45,7 +45,7 @@ function findProfileTitle(node: Element): string | null{
     return titleNode.textContent.trim();
 }
 
-function onClickListingResult(e: MouseEvent): void {
+async function onClickListingResult(e: MouseEvent): Promise<void> {
     const target = e.target as HTMLButtonElement;
     if(!target) return;
 
@@ -63,20 +63,30 @@ function onClickListingResult(e: MouseEvent): void {
         imageSrc: findProfileImage(resultListingElement)
     }
 
+    var btnNode: HTMLButtonElement | null = null;
+
+    if(target.nodeName.toLowerCase() !== "button"){ // Mean click on inner elem in button
+        const button = target.closest("button");
+        if(button){
+            btnNode = button;
+        }
+    }else{
+        btnNode = target;
+    }
+
     browser.runtime.sendMessage({
         action: "saveProfiles",
         payload: [profile]
+    }).catch((err) => {
+        console.log(err)
+        const errorText = "Error while importing!"
+        if(btnNode) disableButton(btnNode, errorText)
     });
 
     // Remplace btn text
     const successText = "Imported!"
-    if(target.nodeName.toLowerCase() !== "button"){ // Mean click on inner elem in button
-        const btnNode = target.closest("button");
-        if(btnNode){
-            disableButton(btnNode, successText)
-        }
-    }else{
-        disableButton(target, successText)
+    if(btnNode) {
+        btnNode = disableButton(btnNode, successText)
     }
 
     e.preventDefault();
@@ -109,6 +119,7 @@ function onClickSaveAll(e: MouseEvent): void {
     const resultListingElements = document.querySelectorAll("li.search-result") as NodeListOf<HTMLLIElement>;
 
     const profiles = [];
+    const buttons:HTMLButtonElement[] = []
 
     for (const resultListingElement of Array.from(resultListingElements)) {
         const infoNode = resultListingElement.querySelector('.search-result__info');
@@ -126,27 +137,42 @@ function onClickSaveAll(e: MouseEvent): void {
             const btn = resultListingElement.querySelector('#' + btnId);
 
             if(btn){
-                disableButton(btn as HTMLButtonElement, 'Imported!')
+                buttons.push(
+                    disableButton(btn as HTMLButtonElement, 'Imported!')
+                )
             }
 
             profiles.push(profile)
         }
     }
 
+    var btnNode: HTMLButtonElement | null = null;
+
     browser.runtime.sendMessage({
         action: "saveProfiles",
         payload: profiles
+    }).catch( (err) => {
+        console.log(err)
+        const errorText = 'Error while importing!';
+        buttons.map( (button) => {
+            disableButton(button, errorText)
+        })
+        if(btnNode) disableButton(btnNode, errorText)
     });
 
     // Remplace btn text
     const successText = `Imported ${profiles.length} profiles!`;
     if(target.nodeName.toLowerCase() !== "button"){ // Mean click on inner elem in button
-        const btnNode = target.closest("button");
-        if(btnNode){
-            disableButton(btnNode, successText)
+        const button = target.closest("button");
+        if(button){
+            btnNode = button
         }
     }else{
-        disableButton(target, successText)
+        btnNode = target
+    }
+
+    if(btnNode) {
+        btnNode = disableButton(btnNode, successText)
     }
 
     e.preventDefault();

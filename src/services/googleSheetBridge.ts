@@ -49,7 +49,7 @@ class GoogleSheetBridge {
         ])
 
         if(
-            result[GOOGLE_SHEET_SPREADSHEET_ID_STORAGE]
+            result[GOOGLE_SHEET_SPREADSHEET_ID_STORAGE] != null
         ) {
             this.spreadsheetId = result[GOOGLE_SHEET_SPREADSHEET_ID_STORAGE];
 
@@ -142,7 +142,7 @@ class GoogleSheetBridge {
         return this.accessToken;
     }
 
-    async isConfigured(): Promise<boolean> {
+    async isLoggedIn(): Promise<boolean> {
         try {
             await this.getAccessToken(false);
             return true;
@@ -150,6 +150,13 @@ class GoogleSheetBridge {
             console.log(err);
             return false;
         }
+    }
+
+    async isConfigured(): Promise<boolean> {
+        if(!this.spreadsheetId) {
+            return false;
+        }
+        return await this.isLoggedIn()
     }
 
     async fetchColumns(spreadsheetId: string): Promise<string[]> {
@@ -170,7 +177,7 @@ class GoogleSheetBridge {
 
     async createProfiles(profiles: LinkedInProfile[]) {
         if(!this.spreadsheetId) {
-            return;
+            throw new Error('Missing spreadsheet id')
         }
 
         const accessToken = await this.getAccessToken()

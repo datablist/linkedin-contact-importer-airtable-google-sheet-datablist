@@ -7,27 +7,18 @@ import { BRIDGE_CHOICE_STORAGE, AIRTABLE, SHEET, DATABLIST } from '@src/options'
 
 
 export async function isBridgeConfigured() {
-    return new Promise( (resolutionFunc) => {
+    const result = await browser.storage.local.get([
+        BRIDGE_CHOICE_STORAGE
+    ]);
 
-        browser.storage.local.get([
-            BRIDGE_CHOICE_STORAGE
-        ]).then(async function(result) {
-            const bridge = result[BRIDGE_CHOICE_STORAGE];
-            if(!bridge) return;
+    const bridge = result[BRIDGE_CHOICE_STORAGE];
+    if(!bridge) return false;
 
-            if(bridge === AIRTABLE) {
-                const response = await AirtableBridge.isConfigured()
-                resolutionFunc(response)
-
-            }else if(bridge === SHEET) {
-                const response = await GoogleSheetBridge.isConfigured()
-                resolutionFunc(response)
-
-            }else if(bridge === DATABLIST){
-                resolutionFunc(false)
-            }
-
-        });
-
-    })
+    if(bridge === AIRTABLE) {
+        return await AirtableBridge.isConfigured()
+    }else if(bridge === SHEET) {
+        return await GoogleSheetBridge.isConfigured()
+    }else if(bridge === DATABLIST){
+        return false;
+    }
 }

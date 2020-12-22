@@ -49,21 +49,29 @@ function onClick(e: MouseEvent){
         imageSrc: findProfileImage(topCardElement)
     }
 
+    var btnNode: HTMLButtonElement | null = null;
+
     browser.runtime.sendMessage({
         action: "saveProfiles",
         payload: [profile]
+    }).catch( (err) => {
+        console.log(err)
+        const errorText = 'Error while importing!';
+        if(btnNode) disableButton(btnNode, errorText)
     });
 
     // Remplace btn text
     const successText = "Imported!"
     if(target.nodeName.toLowerCase() !== "button"){ // Mean click on inner elem in button
-        const btnNode = target.closest("button");
-        if(btnNode){
-            disableButton(btnNode, successText)
+        const button = target.closest("button");
+        if(button){
+            btnNode = button;
         }
     }else{
-        disableButton(target, successText)
+        btnNode = target;
     }
+
+    if(btnNode) btnNode = disableButton(btnNode, successText)
 
     e.preventDefault();
 }
@@ -89,10 +97,4 @@ export const renderAddProfileBtn = async (rootNode: HTMLDivElement | null) => {
         listingElem.appendChild(btn)
         listActionNode.appendChild(listingElem);
     }
-
-    // const titleNode = rootNode.querySelector('h1');
-    // if (titleNode)
-    //     titleNode.after(btn);
-    // else
-    //     rootNode.appendChild(btn);
 };

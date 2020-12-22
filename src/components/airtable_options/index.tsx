@@ -129,14 +129,32 @@ export const  AirtableConf: FunctionComponent = () => {
                     >
                         Airtable Table Id
                     </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="airtable_table_id"
-                        placeholder="tblXXXXXXX"
-                        onChange={handleTableIdChange}
-                        value={tableId}
-                    />
+                    <div className="input-group mb-2">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="airtable_table_id"
+                            placeholder="tblXXXXXXX"
+                            onChange={handleTableIdChange}
+                            value={tableId}
+                        />
+                        {tableId.length > 10 && (
+                            <a
+                                className="input-group-text"
+                                href={`https://airtable.com/${tableId}/`}
+                                target="_blank"
+                            >
+                                <img
+                                width={16}
+                                height={16}
+                                src={browser.runtime.getURL("images/external-link.svg")}
+                                />
+                            </a>
+                        )}
+                    </div>
+                    <div className="form-text">
+                        https://airtable.com/<strong>AirtableTableId</strong>/xxxxxx
+                    </div>
                 </div>
             </form>
 

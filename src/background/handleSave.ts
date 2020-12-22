@@ -8,29 +8,33 @@ import GoogleSheetBridge from '@src/services/googleSheetBridge'
 import { BRIDGE_CHOICE_STORAGE, AIRTABLE, SHEET, DATABLIST } from '@src/options'
 
 
-export async function saveProfiles(tab: Tabs.Tab | undefined, profiles: LinkedInProfile[]) {
+export async function saveProfiles(
+    tab: Tabs.Tab | undefined,
+    profiles: LinkedInProfile[]
+) {
 
-    browser.storage.local.get([
+    const result = await browser.storage.local.get([
         BRIDGE_CHOICE_STORAGE
-    ]).then(async function(result) {
-        const bridge = result[BRIDGE_CHOICE_STORAGE];
-        if(!bridge) return;
+    ])
 
-        if(bridge === AIRTABLE) {
-            const response = await AirtableBridge.createProfiles(profiles)
-        }else if(bridge === SHEET) {
-            const response = await GoogleSheetBridge.createProfiles(profiles)
-        }else if(bridge === DATABLIST){
+    const bridge = result[BRIDGE_CHOICE_STORAGE];
+    if(!bridge) {
+        throw new Error("No bridge configured");
+    };
 
-        }
-
-    });
-
-
-    if (!tab) {
-        return;
+    if(bridge === AIRTABLE) {
+        return await AirtableBridge.createProfiles(profiles)
+    }else if(bridge === SHEET) {
+        return await GoogleSheetBridge.createProfiles(profiles)
+    }else if(bridge === DATABLIST){
+        throw new Error("Datablist is not yet available");
     }
-    const { id: tabId } = tab
+
+
+    // if (!tab) {
+    //     return;
+    // }
+    // const { id: tabId } = tab
     // if (response) {
     //     browser.tabs.sendMessage(tabId, {
     //         action: "GOOD"

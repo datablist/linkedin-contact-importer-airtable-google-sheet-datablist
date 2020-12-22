@@ -39,7 +39,7 @@ export class ApiService {
      * @param {bool} auth - check for unauth error or not
      */
     handleCommonError(response: Response) {
-        if (response.status !== 200 && response.status !== 201) {
+        if (response.status < 200 || response.status >= 400) {
             throw new Error(`Receive error code ${response.status}`)
         }
         return;
