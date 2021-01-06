@@ -11,6 +11,7 @@ import { Mapping } from './mapping'
 export const GoogleSheetConf: FunctionComponent = () => {
     const [spreadsheetId, setSpreadsheetId] = useState('');
     const [connectionStatus, setConnectionStatus] = useState('pending');
+    const [googleSignInLoading, setGoogleSignInLoading] = useState(false);
 
     useEffect(()=> {
         browser.storage.local.get([
@@ -34,11 +35,14 @@ export const GoogleSheetConf: FunctionComponent = () => {
     }, [])
 
     async function handleAuthGoogle(){
+        setGoogleSignInLoading(true);
+
         try {
             await GoogleSheetBridge.authChrome(true);
             setConnectionStatus('ok')
         } catch(err) {
             setConnectionStatus('disconnected')
+            setGoogleSignInLoading(false);
         }
     }
 
@@ -130,8 +134,13 @@ export const GoogleSheetConf: FunctionComponent = () => {
                 <button
                     className="btn btn-primary"
                     onClick={handleAuthGoogle}
+                    disabled={googleSignInLoading}
                 >
-                    Sign-in with Google
+                    {googleSignInLoading ? (
+                        <span>Loading..</span>
+                    ) : (
+                        <span>Sign-in with Google</span>
+                    )}
                 </button>
             </div>
         )

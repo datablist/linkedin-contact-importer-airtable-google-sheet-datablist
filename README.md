@@ -36,6 +36,15 @@ In [Google Chrome](https://www.google.com/chrome/), open up chrome://extensions 
 
 ![Import Contacts Listing](images/ImportListing.png "Import Contacts Listing")
 
+## Debug Notes
+
+To remove your Google token, go to https://myaccount.google.com/permissions and delete the access. Then to clear the cached token, open the Dev Console on the extension popup and run:
+
+```
+chrome.storage.local.clear()
+chrome.identity.clearAllCachedAuthTokens(() => {console.log('Token removed')})
+```
+
 
 ## Author
 

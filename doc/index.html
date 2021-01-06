@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" >
+
+        <title>LinkedIn Contact Importer</title>
+
+        <meta name="title" content="Chrome Extension - LinkedIn Contact Importer Airtable - Google Sheet - Datablist" />
+        <meta name="description" content="This Chrome Extension allows you to import quickly LinkedIn profiles to spreadsheets. It is compatible with Airtable, Google Sheet and Datablist." />
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+            crossorigin="anonymous">
+
+
+        <style>
+        #sticky-sidebar {
+            position: sticky;
+            top: 10px;
+        }
+        </style>
+
+    </head>
+    <body>
+
+        <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <p class="h5 my-0 me-md-auto fw-normal">LinkedIn Contact Importer</p>
+            <nav class="my-2 my-md-0 me-md-3">
+                <a class="p-2 text-dark" href="#">Google Chrome Extension</a>
+                <a class="p-2 text-dark" href="#">Github Repository</a>
+            </nav>
+        </header>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-3 position-relative">
+                    <div id="sticky-sidebar">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#installation">
+                                    Installation
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#airtable_conf">
+                                    Configuration with Airtable
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#">
+                                    Configuration with Google Sheet
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">
+                                    Configuration with Datablist
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <main class="col-9">
+
+                    <h1>Documentation</h1>
+
+                    <h2 id="installation">Installation</h2>
+
+
+                    <p>First, add the Chrome Extension from the <a target="_blank" href="https://chrome.google.com/webstore/detail/linkedin-contact-importer/ldhidjmfmddalaldeppecmcnbiggopdd">Chrome Store</a>.</p>
+                    <img src="static/chrome_store.png" class="img-fluid" />
+
+                    <p>And pin it so the icon is visible when you will be navigating.</p>
+
+                    <div class="text-center">
+                        <img src="static/pin_extension.png" class="img-fluid col-6 " />
+                    </div>
+
+
+                    <h2 id="airtable_conf">Configuration with Airtable</h2>
+
+                    <h3>Step 1: Create a Airtable Base</h3>
+
+                    <p>To import LinkedIn profiles to Airtable, create an Airtable base with the following columns:
+
+                        <ul>
+                            <li>LinkedIn Url (Text)</li>
+                            <li>Name (Text)</li>
+                            <li>Title (Text)</li>
+                            <li>Image (Attachment)</li>
+                        </ul>
+                    </p>
+
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading">Important!</h4>
+                        <ul>
+                            <li>Use a Attachment type for the Image field type.</li>
+                            <li><strong>Add at least one row of data so the extension will be able to fetch the columns for the matching.</strong></li>
+                        </ul>
+                    </div>
+
+                    <img src="static/airtable_conf_1.png" class="img-fluid" />
+
+                    <h3 class="mt-5">Step 2: Fill out the API Key, Base Id and Table Id</h3>
+                    <p>To get your Airtable API key, go to the Help -> API Documentation page. Then, click on the "show API key" checkbox.</p>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <img src="static/airtable_conf_2.png" class="img-fluid" />
+                        </div>
+                        <div class="col-8">
+                            <img src="static/airtable_conf_3.png" class="img-fluid" />
+                            <img src="static/airtable_conf_4.png" class="img-fluid mt-4" />
+                        </div>
+                    </div>
+
+                    <h3 class="mt-5">Step 3: Map the columns</h3>
+
+                    <p>Once the API Key, the Base Id and the Table Id have been set, you will be able to configure the mapping between the information available for the LinkedIn profiles and your Airtable columns.</p>
+
+                    <div class="text-center">
+                        <img src="static/airtable_conf_5.png" class="img-fluid col-6 " />
+                    </div>
+
+                    <h3 class="mt-5">Step 4: Go on LinkedIn or refresh the page</h3>
+                    <p>If you are already on LinkedIn, refresh the page. If not go to a LinkedIn profile page or a search listing.
+                        When the Chrome Extension is well configured, a button will be added to import the profile(s).</p>
+
+                    <div class="text-center">
+                        <img src="static/configured_badge.png" class="img-fluid col-2 " />
+
+                    </div>
+
+
+
+                </main>
+
+            </div>
+
+
+            <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+            <div class="col-12 col-md">
+            <img class="mb-2" src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="24" height="19">
+            <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
+            </div>
+            <div class="col-6 col-md">
+            <h5>Features</h5>
+            <ul class="list-unstyled text-small">
+            <li><a class="link-secondary" href="#">Cool stuff</a></li>
+            <li><a class="link-secondary" href="#">Random feature</a></li>
+            <li><a class="link-secondary" href="#">Team feature</a></li>
+            <li><a class="link-secondary" href="#">Stuff for developers</a></li>
+            <li><a class="link-secondary" href="#">Another one</a></li>
+            <li><a class="link-secondary" href="#">Last time</a></li>
+            </ul>
+            </div>
+            <div class="col-6 col-md">
+            <h5>Resources</h5>
+            <ul class="list-unstyled text-small">
+            <li><a class="link-secondary" href="#">Resource</a></li>
+            <li><a class="link-secondary" href="#">Resource name</a></li>
+            <li><a class="link-secondary" href="#">Another resource</a></li>
+            <li><a class="link-secondary" href="#">Final resource</a></li>
+            </ul>
+            </div>
+            <div class="col-6 col-md">
+            <h5>About</h5>
+            <ul class="list-unstyled text-small">
+            <li><a class="link-secondary" href="#">Team</a></li>
+            <li><a class="link-secondary" href="#">Locations</a></li>
+            <li><a class="link-secondary" href="#">Privacy</a></li>
+            <li><a class="link-secondary" href="#">Terms</a></li>
+            </ul>
+            </div>
+            </div>
+            </footer>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    </body>
+</html>

@@ -32,23 +32,28 @@ export const Mapping: FunctionComponent<IMappingProps> = ({
         // Airtable doesnt allow to fetch table schema.. LOL! Ok boomer..
         // Load one record to get fields from it
         base(tableId).select({
-            maxRecords: 1,
-        }).eachPage(function page(records) {
-            if(records.length>0){
-                const fields = Object.keys(records[0].fields);
-                if(fields.length>0){
+            maxRecords: 10
+        }).firstPage((error, records) => {
+            if(error){
+                console.log(error);
+                if(error.message){
+                    setErrorMessage(error.message)
+                }
+            } else if(records && records.length>0){
+                // Find a record with fields
+                const niceRecord = records.find((record) => {
+                    return Object.keys(record.fields).length > 1
+                })
+
+                if(!niceRecord) {
+                    setErrorMessage("To fetch the fields from your table, all the cells from the first row must have values.")
+                } else {
+                    const fields = Object.keys(niceRecord.fields);
                     setErrorMessage("")
                     setFields(fields)
-                }else{
-                    setErrorMessage("To fetch the fields from your table, all the cells from the first row must have values.")
                 }
             } else {
                 setErrorMessage("Your Airtable table must have at least one row.")
-            }
-        }).catch((error) => {
-            console.log(error);
-            if(error.message){
-                setErrorMessage(error.message)
             }
         });
     }, [
