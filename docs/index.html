@@ -52,7 +52,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled" href="#">
+                                <a class="nav-link" href="#google_sheet_conf">
                                     Configuration with Google Sheet
                                 </a>
                             </li>
@@ -73,7 +73,7 @@
                     <h2 id="installation">Installation</h2>
 
 
-                    <p>First, add the Chrome Extension from the <a target="_blank" href="https://chrome.google.com/webstore/detail/linkedin-contact-importer/ldhidjmfmddalaldeppecmcnbiggopdd">Chrome Store</a>.</p>
+                    <p>First, add the Chrome Extension from the <a target="_blank" href="https://chrome.google.com/webstore/detail/linkedin-contact-importer/ldhidjmfmddalaldeppecmcnbiggopdd">Google Chrome Store</a>.</p>
                     <img src="static/chrome_store.png" class="img-fluid" />
 
                     <p>And pin it so the icon is visible when you will be navigating.</p>
@@ -85,13 +85,13 @@
 
                     <h2 id="airtable_conf">Configuration with Airtable</h2>
 
-                    <h3>Step 1: Create a Airtable Base</h3>
+                    <h3>Step 1: Create an Airtable Base</h3>
 
                     <p>To import LinkedIn profiles to Airtable, create an Airtable base with the following columns:
 
                         <ul>
-                            <li>LinkedIn Url (Text)</li>
                             <li>Name (Text)</li>
+                            <li>LinkedIn Url (Text)</li>
                             <li>Title (Text)</li>
                             <li>Image (Attachment)</li>
                         </ul>
@@ -137,6 +137,54 @@
 
                     </div>
 
+                    <hr class="mt-5" />
+
+                    <h2 id="google_sheet_conf" class="mt-5">Configuration with Google Sheet</h2>
+
+                    <h3>Step 1: Sign-in with your Google Account</h3>
+
+                    <p>To import LinkedIn Profiles in a Google Sheet, you will need to authorize the Chrome Extension to edit your Google Spreadsheets.</p>
+
+                    <div class="text-center">
+                        <img src="static/google-content-screen.png" class="img-fluid  col-9" />
+                    </div>
+
+                    <h3>Step 2: Create a spreadsheet</h3>
+
+                    <p>Create a Google spreadsheet and write following column names on the first row:
+
+                        <ul>
+                            <li>Name</li>
+                            <li>LinkedIn Url</li>
+                            <li>Title</li>
+                            <li>Image</li>
+                        </ul>
+                    </p>
+
+                    <div class="text-center">
+                        <img src="static/google_sheet_conf_2.png" class="img-fluid  col-7" />
+                    </div>
+
+                    <h3>Step 3: Fill out the spreadsheet id</h3>
+
+                    <p>Then, copy the spreadsheet id visible in the document url with the following pattern: https://docs.google.com/spreadsheets/d/<strong>SPREADSHEET_ID</strong>/edit</p>
+
+                    <h3>Step 4: Map the columns</h3>
+
+                    <p>Once the spreadsheet id has been set, you will be able to configure the mapping between the information available for the LinkedIn profiles and your Google spreadsheet columns.</p>
+
+                    <div class="text-center">
+                        <img src="static/google_sheet_conf_3.png" class="img-fluid  col-7" />
+                    </div>
+
+                    <h3 class="mt-5">Step 5: Go on LinkedIn or refresh the page</h3>
+                    <p>If you are already on LinkedIn, refresh the page. If not go to a LinkedIn profile page or a search listing.
+                        When the Chrome Extension is well configured, a button will be added to import the profile(s).</p>
+
+                    <div class="text-center">
+                        <img src="static/configured_badge.png" class="img-fluid col-2 " />
+
+                    </div>
 
 
                 </main>

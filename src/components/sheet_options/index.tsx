@@ -130,18 +130,23 @@ export const GoogleSheetConf: FunctionComponent = () => {
     } else {
         return (
             <div>
-
-                <button
-                    className="btn btn-primary"
-                    onClick={handleAuthGoogle}
-                    disabled={googleSignInLoading}
-                >
-                    {googleSignInLoading ? (
-                        <span>Loading..</span>
-                    ) : (
-                        <span>Sign-in with Google</span>
-                    )}
-                </button>
+                <div className="text-center">
+                    <button
+                        className="btn btn-primary"
+                        onClick={handleAuthGoogle}
+                        disabled={googleSignInLoading}
+                    >
+                        {googleSignInLoading ? (
+                            <span>Loading..</span>
+                        ) : (
+                            <span>Sign-in with Google</span>
+                        )}
+                    </button>
+                </div>
+                <div className="mt-4">
+                    Note: You will be asked to authorize "Datablist - LinkedIn Contact Importer" to access your Google Spreadsheet files.<br />
+                    <a target="_blank" href="https://datablist.github.io/linkedin-contact-importer-airtable-google-sheet-datablist/#google_sheet_conf">Read the documentation to know more.</a>
+                </div>
             </div>
         )
     }

@@ -158,12 +158,14 @@ export const  AirtableConf: FunctionComponent = () => {
                 </div>
             </form>
 
-            {validConfiguration && (
+            {validConfiguration ? (
                 <Mapping
                     apiKey={apiKey}
                     baseId={baseId}
                     tableId={tableId}
                 />
+            ) : (
+                <p><a target="_blank" href="https://datablist.github.io/linkedin-contact-importer-airtable-google-sheet-datablist/#airtable_conf">Read the documentation.</a></p>
             )}
         </div>
     )
