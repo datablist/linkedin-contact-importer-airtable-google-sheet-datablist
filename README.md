@@ -1,5 +1,7 @@
 # Chrome Extension - LinkedIn Contact Importer Airtable - Google Sheet - Datablist
 
+[Download the extension on the Chrome Store.](https://chrome.google.com/webstore/detail/linkedin-contact-importer/ldhidjmfmddalaldeppecmcnbiggopdd?hl=en)
+
 This Chrome Extension allows you to import quickly LinkedIn profiles to spreadsheets. It is compatible with Airtable, Google Sheet and Datablist.
 
 Once you have configured your Airtable api key, or connected with your Google account, a "Save Profile" button will be visible on contact profiles and on listing results.
