@@ -3,6 +3,9 @@ import { LinkedInProfile } from '../Profile'
 import { generateBtnId, createBtn, hasElement, disableButton } from './button'
 
 
+const listingProfileElement = '.search-results__result-list .search-results__result-container > .ember-view';
+const listingProfileInfoElement = '.result-lockup__profile-info';
+
 /*
     Search page
 */
@@ -25,7 +28,7 @@ function findProfileLink(node: Element): string | null {
 }
 
 function findProfileName(node: Element): string | null{
-    const nameNode = node.querySelector('.name.actor-name');
+    const nameNode = node.querySelector('.result-lockup__name a');
     if(!nameNode || !nameNode.textContent)
         return null;
 
@@ -33,7 +36,7 @@ function findProfileName(node: Element): string | null{
 }
 
 function findProfileTitle(node: Element): string | null{
-    const titleNode = node.querySelector('p.subline-level-1');
+    const titleNode = node.querySelector('.result-lockup__highlight-keyword span:first-child');
     if(!titleNode || !titleNode.textContent)
         return null;
 
@@ -45,10 +48,10 @@ async function onClickListingResult(e: MouseEvent): Promise<void> {
     if(!target) return;
 
     // Find listing item ancestor
-    const resultListingElement = target.closest("li.search-result,.entity-result");
+    const resultListingElement = target.closest(".search-results__result-container");
     if(!resultListingElement) return
 
-    const infoNode = resultListingElement.querySelector('.search-result__info,.entity-result__content');
+    const infoNode = resultListingElement.querySelector(listingProfileInfoElement);
     if(!infoNode) return
 
     const profile:LinkedInProfile = {
@@ -88,7 +91,7 @@ async function onClickListingResult(e: MouseEvent): Promise<void> {
 }
 
 
-export const renderSearchResultsBtn = async (
+export const renderSalesNavResultsBtn = async (
     resultListingElements: NodeListOf<HTMLLIElement>,
     actionsSelection: string
 ) => {
@@ -109,18 +112,20 @@ export const renderSearchResultsBtn = async (
 };
 
 
+
+
 function onClickSaveAll(e: MouseEvent): void {
     const target = e.target as HTMLButtonElement;
     if(!target) return;
 
     // Find listing items
-    const resultListingElements = document.querySelectorAll("li.search-result") as NodeListOf<HTMLLIElement>;
+    const resultListingElements = document.querySelectorAll(listingProfileElement) as NodeListOf<HTMLLIElement>;
 
     const profiles = [];
     const buttons:HTMLButtonElement[] = []
 
     for (const resultListingElement of Array.from(resultListingElements)) {
-        const infoNode = resultListingElement.querySelector('.search-result__info');
+        const infoNode = resultListingElement.querySelector(listingProfileInfoElement);
 
         if(infoNode){
             const profile:LinkedInProfile = {
@@ -178,7 +183,7 @@ function onClickSaveAll(e: MouseEvent): void {
 
 const saveAllId = "save-all-extension"
 
-export const renderSaveAllBtn = async (totalNode: HTMLDivElement | null) => {
+export const renderSaveAllSalesNavBtn = async (totalNode: HTMLDivElement | null) => {
     if(!totalNode) return
 
     const parent = totalNode.parentNode;
@@ -204,6 +209,7 @@ export const renderSaveAllBtn = async (totalNode: HTMLDivElement | null) => {
         divElem.id = saveAllId;
         divElem.style.textAlign = "right";
         divElem.style.paddingRight = "20px";
+        divElem.style.paddingBottom = "20px";
         divElem.dataset.page = resultPageNumber;
 
         addBtnToDiv(divElem)

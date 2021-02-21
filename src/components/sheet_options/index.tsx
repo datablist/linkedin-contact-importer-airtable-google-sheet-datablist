@@ -125,6 +125,10 @@ export const GoogleSheetConf: FunctionComponent = () => {
                         />
                     )}
                 </div>
+                <div className="mt-4">
+                    Note: Once configured, reload the linkedin page to see the Import button.<br />
+                    <a target="_blank" href="https://datablist.github.io/linkedin-contact-importer-airtable-google-sheet-datablist/#google_sheet_conf">Read the documentation to know more.</a>
+                </div>
             </div>
         )
     } else {
