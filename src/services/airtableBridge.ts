@@ -27,6 +27,7 @@ class AirtableBridge {
         const LinkedInUrlMapping = AirtableFieldMappingStorage('LinkedInUrl');
         const ImageMapping = AirtableFieldMappingStorage('Image');
         const TitleMapping = AirtableFieldMappingStorage('Title');
+        const CompanyMapping = AirtableFieldMappingStorage('Company');
         const NameMapping = AirtableFieldMappingStorage('Name');
 
         const result = await browser.storage.local.get([
@@ -36,6 +37,7 @@ class AirtableBridge {
             LinkedInUrlMapping,
             ImageMapping,
             TitleMapping,
+            CompanyMapping,
             NameMapping
         ])
 
@@ -58,6 +60,7 @@ class AirtableBridge {
                 'LinkedInUrl': result[LinkedInUrlMapping],
                 'Image': result[ImageMapping],
                 'Title': result[TitleMapping],
+                'Company': result[CompanyMapping],
                 'Name': result[NameMapping]
             }
         }
@@ -95,6 +98,7 @@ class AirtableBridge {
         const linkedInUrlField = this.getMapping('LinkedInUrl');
         const imageField = this.getMapping('Image');
         const titleField = this.getMapping('Title');
+        const companyField = this.getMapping('Company');
         const nameField = this.getMapping('Name');
 
         const records:object[] = [];
@@ -117,6 +121,10 @@ class AirtableBridge {
 
             if(nameField){
                 fields[nameField] = profile.name
+            }
+
+            if (companyField) {
+                fields[nameField] = profile.company
             }
 
             records.push({
