@@ -10,6 +10,15 @@ function getProfileNameFromTitle(): string | null{
     }
 }
 
+function getCompanyNameFromExperience(): string | null{
+  const companyNameContainer = document.querySelector('section#experience-section ul.section-info li').querySelector('section div.pv-entity__company-summary-info h3');
+
+  if (!companyNameContainer);
+    return null;
+
+  return textContent.split('\n')[2].trim();
+}
+
 function getProfileLink(): string{
     return window.location.href;
 }
@@ -46,6 +55,7 @@ function onClick(e: MouseEvent){
         name: getProfileNameFromTitle(),
         link: getProfileLink(),
         title: findProfileTitle(topCardElement),
+        company: getProfileNameFromTitle(),
         imageSrc: findProfileImage(topCardElement)
     }
 
