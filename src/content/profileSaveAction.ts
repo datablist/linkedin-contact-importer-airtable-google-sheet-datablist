@@ -10,6 +10,16 @@ function getProfileNameFromTitle(): string | null{
     }
 }
 
+function getCompanyNameFromExperience(node: Element): string | null{
+    const companyNameNode = node.querySelector('.pv-top-card--experience-list li')?.firstElementChild?.querySelector('span')
+
+    if (!companyNameNode || !companyNameNode.textContent) {
+        return null;
+    }
+
+    return companyNameNode.textContent.trim();
+}
+
 function getProfileLink(): string{
     return window.location.href;
 }
@@ -40,12 +50,11 @@ function onClick(e: MouseEvent){
     const topCardElement = target.closest("section.pv-top-card");
     if(!topCardElement) return
 
-    // browser.runtime.sendMessage({ saveProfile: "COCUOCUUC" });
-
     const profile:LinkedInProfile = {
         name: getProfileNameFromTitle(),
         link: getProfileLink(),
         title: findProfileTitle(topCardElement),
+        company: getCompanyNameFromExperience(topCardElement),
         imageSrc: findProfileImage(topCardElement)
     }
 

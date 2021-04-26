@@ -11,6 +11,7 @@ export const PROFILE_FIELDS = [
     "LinkedInUrl",
     "Image",
     "Title",
+    "Company",
     "Name"
 ]
 export const AirtableFieldMappingStorage = (field: string): string => {

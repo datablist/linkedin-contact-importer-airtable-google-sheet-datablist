@@ -38,6 +38,7 @@ class GoogleSheetBridge {
         const LinkedInUrlMapping = GSheetFieldMappingStorage('LinkedInUrl');
         const ImageMapping = GSheetFieldMappingStorage('Image');
         const TitleMapping = GSheetFieldMappingStorage('Title');
+        const CompanyMapping = GSheetFieldMappingStorage('Company');
         const NameMapping = GSheetFieldMappingStorage('Name');
 
         const result = await browser.storage.local.get([
@@ -45,6 +46,7 @@ class GoogleSheetBridge {
             LinkedInUrlMapping,
             ImageMapping,
             TitleMapping,
+            CompanyMapping,
             NameMapping
         ])
 
@@ -57,6 +59,7 @@ class GoogleSheetBridge {
                 'LinkedInUrl': result[LinkedInUrlMapping],
                 'Image': result[ImageMapping],
                 'Title': result[TitleMapping],
+                'Company': result[CompanyMapping],
                 'Name': result[NameMapping]
             }
         }
@@ -186,6 +189,7 @@ class GoogleSheetBridge {
         const linkedInUrlPosition = this.getColumnIndex('LinkedInUrl');
         const imagePosition = this.getColumnIndex('Image');
         const titlePosition = this.getColumnIndex('Title');
+        const companyPosition = this.getColumnIndex('Company');
         const namePosition = this.getColumnIndex('Name');
 
         const rows:Array<string[]> = [];
@@ -203,6 +207,10 @@ class GoogleSheetBridge {
 
             if( (imagePosition != null) && profile.imageSrc){
                 row[imagePosition] = profile.imageSrc;
+            }
+
+            if( (companyPosition != null) && profile.company){
+                row[companyPosition] = profile.company
             }
 
             if( (titlePosition != null) && profile.title){
