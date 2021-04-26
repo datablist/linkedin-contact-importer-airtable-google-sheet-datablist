@@ -10,13 +10,14 @@ function getProfileNameFromTitle(): string | null{
     }
 }
 
-function getCompanyNameFromExperience(): string | null{
-  const companyNameContainer = document.querySelector('section#experience-section ul.section-info li').querySelector('section div.pv-entity__company-summary-info h3');
+function getCompanyNameFromExperience(node: Element): string | null{
+    const companyNameNode = node.querySelector('.pv-top-card--experience-list li')?.firstElementChild?.querySelector('span')
 
-  if (!companyNameContainer);
-    return null;
+    if (!companyNameNode || !companyNameNode.textContent) {
+        return null;
+    }
 
-  return textContent.split('\n')[2].trim();
+    return companyNameNode.textContent.trim();
 }
 
 function getProfileLink(): string{
@@ -49,13 +50,11 @@ function onClick(e: MouseEvent){
     const topCardElement = target.closest("section.pv-top-card");
     if(!topCardElement) return
 
-    // browser.runtime.sendMessage({ saveProfile: "COCUOCUUC" });
-
     const profile:LinkedInProfile = {
         name: getProfileNameFromTitle(),
         link: getProfileLink(),
         title: findProfileTitle(topCardElement),
-        company: getProfileNameFromTitle(),
+        company: getCompanyNameFromExperience(topCardElement),
         imageSrc: findProfileImage(topCardElement)
     }
 

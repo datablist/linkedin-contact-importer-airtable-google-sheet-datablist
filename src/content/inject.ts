@@ -8,6 +8,7 @@ import { hasElement } from './button'
 /*
     Profile
 */
+let currentPage = window.location.pathname;
 const isOnProfilePage = () => window.location.pathname.includes('/in/');
 const profileCardSelector = '.pv-top-card.artdeco-card';
 
@@ -31,8 +32,20 @@ const salesAllSelector = '.search-results__pagination';
 
 
 const analysePage = async () => {
-    if (isOnProfilePage() && !hasElement(saveProfileBtnIdentifier, document)) {
-        await renderAddProfileBtn(document.querySelector(profileCardSelector));
+    if (isOnProfilePage()) {
+        if(currentPage !== window.location.pathname){
+            currentPage = window.location.pathname;
+            // Refresh button on page change
+            const currentBtn = document.querySelector('#' + saveProfileBtnIdentifier);
+            if(currentBtn){
+                currentBtn.remove();
+            }
+            await renderAddProfileBtn(document.querySelector(profileCardSelector));
+        }else{
+            if(!hasElement(saveProfileBtnIdentifier, document)) {
+               await renderAddProfileBtn(document.querySelector(profileCardSelector));
+            }
+        }
     }
     if (isOnSearchPage()) {
         await renderSearchResultsBtn(

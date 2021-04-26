@@ -25,7 +25,7 @@ function findProfileLink(node: Element): string | null {
 }
 
 function findProfileName(node: Element): string | null{
-    const nameNode = node.querySelector('.name.actor-name');
+    const nameNode = node.querySelector('.name.actor-name') || node.querySelector('.entity-result__title-text span span:not(.visually-hidden)');
     if(!nameNode || !nameNode.textContent)
         return null;
 
@@ -33,7 +33,7 @@ function findProfileName(node: Element): string | null{
 }
 
 function findProfileTitle(node: Element): string | null{
-    const titleNode = node.querySelector('p.subline-level-1');
+    const titleNode = node.querySelector('p.subline-level-1,.entity-result__primary-subtitle');
     if(!titleNode || !titleNode.textContent)
         return null;
 
@@ -114,13 +114,13 @@ function onClickSaveAll(e: MouseEvent): void {
     if(!target) return;
 
     // Find listing items
-    const resultListingElements = document.querySelectorAll("li.search-result") as NodeListOf<HTMLLIElement>;
+    const resultListingElements = document.querySelectorAll("li.search-result,.entity-result") as NodeListOf<HTMLLIElement>;
 
     const profiles = [];
     const buttons:HTMLButtonElement[] = []
 
     for (const resultListingElement of Array.from(resultListingElements)) {
-        const infoNode = resultListingElement.querySelector('.search-result__info');
+        const infoNode = resultListingElement.querySelector('.search-result__info,.entity-result__content');
 
         if(infoNode){
             const profile:LinkedInProfile = {

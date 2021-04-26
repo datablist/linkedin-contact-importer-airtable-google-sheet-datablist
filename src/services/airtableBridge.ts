@@ -45,7 +45,7 @@ class AirtableBridge {
             result[AIRTABLE_APIKEY_STORAGE] &&
             result[AIRTABLE_BASEID_STORAGE] &&
             result[AIRTABLE_TABLEID_STORAGE]
-        ) {            
+        ) {
             Airtable.configure({
                 endpointUrl: 'https://api.airtable.com',
                 apiKey: result[AIRTABLE_APIKEY_STORAGE],
@@ -124,7 +124,7 @@ class AirtableBridge {
             }
 
             if (companyField) {
-                fields[nameField] = profile.company
+                fields[companyField] = profile.company
             }
 
             records.push({
