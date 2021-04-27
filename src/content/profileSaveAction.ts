@@ -4,7 +4,8 @@ import { createBtn, disableButton } from './button'
 
 function getProfileNameFromTitle(): string | null{
     if (document.title && document.title.length) {
-        return document.title.replace(/\([0-9]+\)/, '').replace(/\|?[ ]*linkedin/i, "").trim()
+        // (23) => '' and (99+) => ''
+        return document.title.replace(/\([0-9\+]+\)/, '').replace(/\|?[ ]*linkedin/i, "").trim()
     } else {
         return null
     }
