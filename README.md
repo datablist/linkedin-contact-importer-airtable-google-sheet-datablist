@@ -1,4 +1,4 @@
-# Chrome Extension - LinkedIn Contact Importer Airtable - Google Sheet - Datablist
+# Chrome Extension - LinkedIn Contact Importer Airtable - Google Sheets - Datablist
 
 [Download the extension on the Chrome Store.](https://chrome.google.com/webstore/detail/linkedin-contact-importer/ldhidjmfmddalaldeppecmcnbiggopdd?hl=en)
 
@@ -33,7 +33,7 @@ In [Google Chrome](https://www.google.com/chrome/), open up `chrome://extensions
 
 ## How to use it
 
-1. Configure a spreadsheet (Airtable, or Google Sheet, or Datablist).
+1. Configure a spreadsheet (Airtable, or Google Sheets, or Datablist).
 
 ![Chrome](images/Chrome.png "Chrome Configuration")
 

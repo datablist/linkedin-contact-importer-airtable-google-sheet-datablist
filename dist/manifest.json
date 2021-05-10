@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "LinkedIn Contact Importer",
-    "description": "Import your contacts in Airtable or Google Sheet directly from your linkedIn pages.",
-    "version": "1.0.4",
+    "description": "Import your contacts in Airtable or Google Sheets directly from your linkedIn pages.",
+    "version": "1.0.5",
     "browser_action": {
         "default_icon": "icon-16.png",
         "default_popup": "popup.html"
