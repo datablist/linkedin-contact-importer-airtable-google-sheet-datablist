@@ -12,13 +12,26 @@ function getProfileNameFromTitle(): string | null{
 }
 
 function getCompanyNameFromExperience(node: Element): string | null{
-    const companyNameNode = node.querySelector('.pv-top-card--experience-list li')?.firstElementChild?.querySelector('span')
+    function method1(){
+        const companyNameNode = node.querySelector('.pv-top-card--experience-list li')?.firstElementChild?.querySelector('span')
 
-    if (!companyNameNode || !companyNameNode.textContent) {
-        return null;
+        if (!companyNameNode || !companyNameNode.textContent) {
+            return null;
+        }
+
+        return companyNameNode.textContent.trim();
     }
 
-    return companyNameNode.textContent.trim();
+    function method2(){
+        const rightPanel = node.querySelector('.pv-text-details__right-panel li')?.firstElementChild?.querySelector('h2 div')
+        if (!rightPanel || !rightPanel.textContent) {
+            return null;
+        }
+
+        return rightPanel.textContent.trim();
+    }
+
+    return method1() || method2();
 }
 
 function getProfileLink(): string{
@@ -26,7 +39,7 @@ function getProfileLink(): string{
 }
 
 function findProfileTitle(node: Element): string | null {
-    const titleNode = node.querySelector('h2');
+    const titleNode = node.querySelector('h2,.text-body-medium');
     if(!titleNode || !titleNode.textContent)
         return null;
 
@@ -34,7 +47,7 @@ function findProfileTitle(node: Element): string | null {
 }
 
 function findProfileImage(node: Element): string | null {
-    const imageNode = node.querySelector('.pv-top-card--photo img') as HTMLImageElement;
+    const imageNode = node.querySelector('.pv-top-card--photo img,.pv-top-card__photo-wrapper img') as HTMLImageElement;
 
     if(!imageNode || !imageNode.src)
         return null;
@@ -100,11 +113,17 @@ export const renderAddProfileBtn = async (rootNode: HTMLDivElement | null) => {
     });
     btn.addEventListener('click', onClick, false);
 
-    const listActionNode = rootNode.querySelector('ul.pv-top-card--list:not(.pv-top-card--list-bullet)');
-
-    if(listActionNode){
+    const listActionNodeOld = rootNode.querySelector('ul.pv-top-card--list:not(.pv-top-card--list-bullet)');
+    if(listActionNodeOld){
         const listingElem = document.createElement('li');
         listingElem.appendChild(btn)
-        listActionNode.appendChild(listingElem);
+        listActionNodeOld.appendChild(listingElem);
+    }else{
+        const listActionNode = rootNode.querySelector('.pvs-profile-actions');
+        if(listActionNode){
+            const flexElem = document.createElement('div');
+            flexElem.appendChild(btn)
+            listActionNode.appendChild(flexElem);
+        }
     }
 };
