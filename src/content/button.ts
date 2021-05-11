@@ -45,7 +45,7 @@ export const createBtn = async ({
     btn.id = btnIdentifier;
     btn.className = className ? className : 'ml2 artdeco-button artdeco-button--secondary';
 
-    btn.style.marginTop = '5px';
+    // btn.style.marginTop = '5px';
     btn.style.display = 'inline-block';
     btn.style.flexShrink = '0';
 

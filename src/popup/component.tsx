@@ -15,7 +15,6 @@ export const Popup: FunctionComponent = () => {
     const [bridge, setBridge] = useState('');
 
     useEffect(() => {
-
         browser.storage.local.get([
             BRIDGE_CHOICE_STORAGE
         ]).then(function(result) {
